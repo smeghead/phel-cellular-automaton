@@ -4,3 +4,6 @@
 
 (defn create-line [width]
   (Line (values (php/array_fill 0 width 0))))
+
+(defn setup-center [l]
+  (Line (put (l :cells) (php/intval (/ (count (l :cells)) 2)) 1)))

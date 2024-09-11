@@ -1,10 +1,26 @@
 (ns cellular-automaton\test\modules\line-test
   (:require cellular-automaton\modules\line)
+  (:require cellular-automaton\modules\rule)
   (:require phel\test :refer [deftest is]))
 
 (deftest test-line-initial
-  (let [line (line/create-line 80)]
-    (is (= 0 (get-in line [:cells 0])))))
+  (let [l (line/create-line 80)]
+    (is (= 0 (get-in l [:cells 0])))))
 
+(deftest test-setup-center-bit
+  (let [l (line/create-line 80)
+        l (line/setup-center l)]
+    (println l)
+    (is (= 1 (get-in l [:cells 40])))))
 
+(deftest test-next-line
+  (let [l (line/create-line 80)
+        l (line/setup-center l)
+        r (rule/Rule 30)
+        l (line/next-line l r)]
+    (println l)
+    (is (= 1 (get-in l [:cells 39])))
+    (is (= 1 (get-in l [:cells 40])))
+    (is (= 1 (get-in l [:cells 41])))
+    ))
 
