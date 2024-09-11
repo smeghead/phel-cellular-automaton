@@ -1,4 +1,5 @@
-(ns cellular-automaton\modules\line)
+(ns cellular-automaton\modules\line
+  (:require cellular-automaton\modules\rule))
 
 (defstruct Line [cells])
 
@@ -7,3 +8,9 @@
 
 (defn setup-center [l]
   (Line (put (l :cells) (php/intval (/ (count (l :cells)) 2)) 1)))
+
+(defn condition-value [l n]
+  (let [previouse ((l :cells) (dec n))
+        current ((l :cells) n)
+        next ((l :cells) (inc n))]
+    (php/bindec (format "%d%d%d" previouse current next))))
