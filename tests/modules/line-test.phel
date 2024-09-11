@@ -10,14 +10,12 @@
 (deftest test-setup-center-bit
   (let [l (line/create-line 80)
         l (line/setup-center l)]
-    (println l)
     (is (= 1 (get-in l [:cells 40])))))
 
 (deftest test-condition-value
   (let [l (line/create-line 80)
         l (line/setup-center l)
         r (rule/Rule 30)]
-    (println l)
     (is (= 1 (line/condition-value l 39)))
     (is (= 2 (line/condition-value l 40)))
     (is (= 4 (line/condition-value l 41)))))
@@ -27,8 +25,15 @@
         l (line/setup-center l)
         r (rule/Rule 30)
         l (line/next-line l r)]
-    (println l)
     (is (= 1 (get-in l [:cells 39])))
     (is (= 1 (get-in l [:cells 40])))
     (is (= 1 (get-in l [:cells 41])))))
 
+(deftest test-line-expression
+  (let [l (line/create-line 80)
+        l (line/setup-center l)
+        r (rule/Rule 30)
+        l (line/next-line l r)
+        expected "                                       ###                                      "]
+    (is (= 80 (php/mb_strlen (line/expression l))))
+    (is (= expected (line/expression l)))))

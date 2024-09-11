@@ -1,4 +1,5 @@
 (ns cellular-automaton\modules\line
+  (:require phel\str)
   (:require cellular-automaton\modules\rule))
 
 (defstruct Line [cells])
@@ -14,3 +15,17 @@
         current ((l :cells) n)
         next ((l :cells) (inc n))]
     (php/bindec (format "%d%d%d" previouse current next))))
+
+(defn next-line [l r]
+  (let [width (l :cells)]
+    (Line (map-indexed |(rule/next-value
+                       r
+                       (php/bindec (format
+                                     "%d%d%d"
+                                     (get-in l [:cells (dec $1)])
+                                     $2
+                                     (get-in l [:cells (inc $1)]))))
+                    (l :cells)))))
+
+(defn expression [l]
+  (str/join "" (map |(if (= $ 1) "#" " ") (l :cells))))
