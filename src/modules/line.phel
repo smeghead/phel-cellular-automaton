@@ -1,0 +1,6 @@
+(ns cellular-automaton\modules\line)
+
+(defstruct Line [cells])
+
+(defn create-line [width]
+  (Line (values (php/array_fill 0 width 0))))

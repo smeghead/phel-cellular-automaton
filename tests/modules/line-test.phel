@@ -1,0 +1,8 @@
+(ns cellular-automaton\test\modules\line-test
+  (:require cellular-automaton\modules\line)
+  (:require phel\test :refer [deftest is]))
+
+(deftest test-line-initial
+  (let [line (line/create-line 80)]
+    (is (= 0 (get-in line [:cells 0])))))
+
