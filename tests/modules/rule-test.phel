@@ -3,15 +3,15 @@
   (:require phel\test :refer [deftest is]))
 
 (deftest test-rule
-  (let [r (rule/create-rule 30)]
-    (is (= 0 (rule/next-value 0)))
-    (is (= 1 (rule/next-value 1)))
-    (is (= 1 (rule/next-value 2)))
-    (is (= 1 (rule/next-value 3)))
-    (is (= 1 (rule/next-value 4)))
-    (is (= 0 (rule/next-value 5)))
-    (is (= 0 (rule/next-value 6)))
-    (is (= 0 (rule/next-value 7)))))
+  (let [r (rule/Rule 30)]
+    (is (= 0 (rule/next-value r 0)))
+    (is (= 1 (rule/next-value r 1)))
+    (is (= 1 (rule/next-value r 2)))
+    (is (= 1 (rule/next-value r 3)))
+    (is (= 1 (rule/next-value r 4)))
+    (is (= 0 (rule/next-value r 5)))
+    (is (= 0 (rule/next-value r 6)))
+    (is (= 0 (rule/next-value r 7)))))
 
 
 

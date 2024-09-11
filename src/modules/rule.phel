@@ -1,0 +1,8 @@
+(ns cellular-automaton\modules\rule)
+
+(defstruct Rule [rule])
+
+(defn next-value [r v]
+  (if (bit-test (r :rule) v)
+    1
+    0))
