@@ -6,3 +6,5 @@
   (let [line (line/create-line 80)]
     (is (= 0 (get-in line [:cells 0])))))
 
+
+

@@ -1,0 +1,17 @@
+(ns cellular-automaton\test\modules\rule-test
+  (:require cellular-automaton\modules\rule)
+  (:require phel\test :refer [deftest is]))
+
+(deftest test-rule
+  (let [r (rule/create-rule 30)]
+    (is (= 0 (rule/next-value 0)))
+    (is (= 1 (rule/next-value 1)))
+    (is (= 1 (rule/next-value 2)))
+    (is (= 1 (rule/next-value 3)))
+    (is (= 1 (rule/next-value 4)))
+    (is (= 0 (rule/next-value 5)))
+    (is (= 0 (rule/next-value 6)))
+    (is (= 0 (rule/next-value 7)))))
+
+
+
