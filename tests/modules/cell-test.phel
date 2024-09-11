@@ -1,0 +1,8 @@
+(ns cellular-automaton\modules\cell-test
+  (:require cellular-automaton\modules\cell :as c)
+  (:require phel\test :refer [deftest is]))
+
+(deftest test-cell-initial
+  (let [cell (c/Cell 80)]
+    (is (= false (cell 0)))))
+
