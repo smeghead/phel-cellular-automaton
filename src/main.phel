@@ -2,15 +2,21 @@
   (:require cellular-automaton\modules\line)
   (:require cellular-automaton\modules\rule))
 
-(let [l (line/create-line 80)
-      l (line/setup-center l)
-      #l (line/setup-random l)
-      r (rule/Rule 90)]
-  (loop [l l
-         r r
-         count 0]
-    (println (line/expression l))
-    (if (> count 40)
-      nil
-      (recur (line/next-line l r) r (inc count)))))
+(when-not *build-mode*
+  (def width 80)
+  (def height 40)
+  (def rule-seed 30)
+  (def type :center) # :center or :random
+
+  (let [l (apply (case type
+                   :center line/setup-center
+                   :random line/setup-random) [(line/create-line width)])
+        r (rule/Rule rule-seed)]
+    (loop [l l
+           r r
+           count 0]
+      (println (line/expression l))
+      (if (> count height)
+        nil
+        (recur (line/next-line l r) r (inc count))))))
 
