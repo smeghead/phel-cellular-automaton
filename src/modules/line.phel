@@ -10,6 +10,11 @@
 (defn setup-center [l]
   (Line (put (l :cells) (php/intval (/ (count (l :cells)) 2)) 1)))
 
+(defn setup-random [l]
+  (let [cells (for [n :range [1 (count (l :cells))]]
+                (php/rand 0 1))]
+    (Line cells)))
+
 (defn condition-value [l n]
   (let [previouse ((l :cells) (dec n))
         current ((l :cells) n)

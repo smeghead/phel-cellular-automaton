@@ -12,6 +12,11 @@
         l (line/setup-center l)]
     (is (= 1 (get-in l [:cells 40])))))
 
+(deftest test-setup-random-bit
+  (let [l (line/create-line 80)
+        l (line/setup-random l)]
+    (is (< 1 (count (filter |(= $ 1) (l :cells)))))))
+
 (deftest test-condition-value
   (let [l (line/create-line 80)
         l (line/setup-center l)

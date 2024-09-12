@@ -4,13 +4,13 @@
 
 (let [l (line/create-line 80)
       l (line/setup-center l)
-      r (rule/Rule 30)]
+      #l (line/setup-random l)
+      r (rule/Rule 90)]
   (loop [l l
          r r
          count 0]
     (println (line/expression l))
     (if (> count 40)
       nil
-      (let [next-line (line/next-line l r)]
-        (recur next-line r (inc count))))))
+      (recur (line/next-line l r) r (inc count)))))
 
