@@ -21,16 +21,17 @@
         next ((l :cells) (inc n))]
     (php/bindec (format "%d%d%d" previouse current next))))
 
+(defn- current-value [l index]
+  (php/bindec
+    (format
+      "%d%d%d"
+      (or (get-in l [:cells (dec index)]) "0")
+      (get-in l [:cells index])
+      (or (get-in l [:cells (inc index)]) "0"))))
+
 (defn next-line [l r]
-  (let [width (l :cells)]
-    (Line (map-indexed |(rule/next-value
-                       r
-                       (php/bindec (format
-                                     "%d%d%d"
-                                     (get-in l [:cells (dec $1)])
-                                     $2
-                                     (get-in l [:cells (inc $1)]))))
-                    (l :cells)))))
+  (Line (map-indexed |(rule/next-value r (current-value l $1))
+                     (l :cells))))
 
 (defn expression [l]
   (str/join "" (map |(if (= $ 1) "#" " ") (l :cells))))
