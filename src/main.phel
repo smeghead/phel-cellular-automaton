@@ -8,15 +8,13 @@
   (def rule-seed 30)
   (def type :center) # :center or :random
 
-  (let [l (apply (case type
-                   :center line/setup-center
-                   :random line/setup-random) [(line/create-line width)])
-        r (rule/Rule rule-seed)]
-    (loop [l l
-           r r
-           count 0]
-      (println (line/expression l))
-      (if (> count height)
-        nil
-        (recur (line/next-line l r) r (inc count))))))
+  (loop [l (apply (case type
+                    :center line/setup-center
+                    :random line/setup-random) [(line/create-line width)])
+         r (rule/Rule rule-seed)
+         count 0]
+    (println (line/expression l))
+    (if (> count height)
+      nil
+      (recur (line/next-line l r) r (inc count)))))
 

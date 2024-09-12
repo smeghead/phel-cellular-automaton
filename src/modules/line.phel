@@ -15,12 +15,6 @@
                 (php/rand 0 1))]
     (Line cells)))
 
-(defn condition-value [l n]
-  (let [previouse ((l :cells) (dec n))
-        current ((l :cells) n)
-        next ((l :cells) (inc n))]
-    (php/bindec (format "%d%d%d" previouse current next))))
-
 (defn- current-value [l index]
   (php/bindec
     (format

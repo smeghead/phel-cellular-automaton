@@ -17,14 +17,6 @@
         l (line/setup-random l)]
     (is (< 1 (count (filter |(= $ 1) (l :cells)))))))
 
-(deftest test-condition-value
-  (let [l (line/create-line 80)
-        l (line/setup-center l)
-        r (rule/Rule 30)]
-    (is (= 1 (line/condition-value l 39)))
-    (is (= 2 (line/condition-value l 40)))
-    (is (= 4 (line/condition-value l 41)))))
-
 (deftest test-next-line
   (let [l (line/create-line 80)
         l (line/setup-center l)
